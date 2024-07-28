@@ -57,6 +57,32 @@ function getManifestV2(pageDirMap: { [x: string]: any }): ManifestTypeV2 {
   }
 
   manifest.permissions = ['tabs', 'storage', 'contextMenus'];
+  manifest.commands = {
+    save_active_tab: {
+      suggested_key: {
+        default: 'Ctrl+B',
+        mac: 'MacCtrl+B',
+      },
+      description: "Send a 'read-later' event to the extension",
+    },
+    open_in_background: {
+      suggested_key: {
+        default: 'Ctrl+Q',
+        mac: 'MacCtrl+Q',
+      },
+      description: 'open selected in background',
+    },
+    log_tabs: {
+      description: "Log current window's tabs",
+    },
+    dublicate_tab: {
+      suggested_key: {
+        default: 'Ctrl+M',
+        mac: 'MacCtrl+M',
+      },
+      description: 'Duplicate a tab',
+    },
+  };
 
   return manifest;
 }

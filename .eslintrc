@@ -32,10 +32,21 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "import/no-unresolved": "error",
+    "no-console": "warn",
     "react/jsx-filename-extension": [
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-    ]
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+   ]
   },
   "globals": {
     "chrome": "readonly",

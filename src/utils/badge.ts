@@ -1,9 +1,9 @@
 import { getCurrentTab } from './tabs';
 
-export function setBadge(text: string) {
+export function setBadge(text: string, onlyCurrent = false) {
   getCurrentTab().then((tab) => {
     chrome.browserAction.setBadgeText({
-      tabId: tab.id,
+      tabId: onlyCurrent ? tab.id : undefined,
       text,
     });
   });

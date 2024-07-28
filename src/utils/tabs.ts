@@ -8,7 +8,7 @@ export function saveTabs() {
       currentWindow: true,
     },
     (tabs) => {
-      const res = tabs.reduce<Omit<Tab, 'createdAt'>[]>((pre, tab) => {
+      const res = tabs.reduce<Omit<Tab, 'date'>[]>((pre, tab) => {
         if (tab.title && tab.url) {
           pre.push({ title: tab.title, url: tab.url });
         }
@@ -24,22 +24,28 @@ export function saveTabs() {
   );
 }
 
-export function getCurrentTab(): Promise<chrome.tabs.Tab> {
+export function getCurrentTabs(highlighted = false): Promise<chrome.tabs.Tab[]> {
   return new Promise((resolve, reject) => {
     chrome.tabs.query(
       {
-        highlighted: true,
+        highlighted: highlighted ? true : undefined,
+        active: highlighted ? undefined : true,
         currentWindow: true,
       },
       (tabs) => {
-        if (tabs[0]) {
-          resolve(tabs[0]);
+        if (tabs) {
+          resolve(tabs);
         } else {
           reject(new Error('[tabs] No tabs found'));
         }
       },
     );
   });
+}
+
+export async function getCurrentTab() {
+  const tabs = await getCurrentTabs(false);
+  return tabs[0];
 }
 
 /**
@@ -77,20 +83,9 @@ export function dublicateTab() {
  * @param text selected text
  * @param command
  */
-export function openUrl(text: string, command: string) {
-  chrome.tabs.query(
-    {
-      active: true,
-      currentWindow: true,
-    },
-    (tabs) => {
-      chrome.tabs.create({
-        url: isURL(text) ? text : `https://www.google.com/search?q=${text}`,
-        active: command !== 'open-in-bg',
-        index: tabs[0].index + 1,
-      });
-    },
-  );
+export function openUrlOrText(text: string, active = false) {
+  const url = isURL(text) ? text : `https://www.google.com/search?q=${text}`;
+  createTab(url, active);
 }
 
 /**

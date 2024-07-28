@@ -12,7 +12,7 @@ export default function Popup(): JSX.Element {
   const getDatabase = useCallback(
     async () => {
       const storage = await getValue();
-      const db = storage?.read_later ?? [] as Tab[];
+      const db: Tab[] = storage?.read_later ?? [];
       return db;
     },
     [],
