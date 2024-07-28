@@ -1,22 +1,20 @@
 import { Tab } from '@src/types';
 import { setBadge } from '@src/utils/badge';
 import { getValue, setValue } from '@src/utils/storage';
-import { createTab } from '@src/utils/tabs';
+import { createTab, getIcon } from '@src/utils/tabs';
 import { useCallback, useEffect, useState } from 'react';
-import { FaBeer } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 
 export default function Popup(): JSX.Element {
   const [tabs, setTabs] = useState<Tab[]>([]);
+  const [filteredTabs, setFilteredTabs] = useState<Tab[]>([]);
   const [query, setQuery] = useState('');
 
-  const getDatabase = useCallback(
-    async () => {
-      const storage = await getValue();
-      const db: Tab[] = storage?.read_later ?? [];
-      return db;
-    },
-    [],
-  );
+  const getDatabase = useCallback(async () => {
+    const storage = await getValue();
+    const db: Tab[] = storage?.read_later ?? [];
+    return db;
+  }, []);
 
   // fill data by local storage
   // reverse the data to display latest tab on top, and to handle remove item easier
@@ -37,7 +35,7 @@ export default function Popup(): JSX.Element {
 
   const setStorageAndUpdateBadge = useCallback((newTabs: Tab[]) => {
     setValue({
-      read_later: newTabs,
+      read_later: [...newTabs].reverse(),
     })
       .then(() => {
         updateBadge(newTabs.length);
@@ -69,23 +67,21 @@ export default function Popup(): JSX.Element {
   // update tabs on query
   useEffect(() => {
     const queryStorage = async () => {
-      const db = await getDatabase();
-      let temp: Tab[];
-      if (query === '') {
-        temp = db;
-      } else {
-        temp = db.filter(
+      let temp = tabs;
+      if (query) {
+        temp = tabs.filter(
           (tab) => tab.url.toLowerCase().indexOf(query) !== -1
             || tab.title.toLowerCase().indexOf(query) !== -1,
         );
       }
-      setTabs(temp);
+
+      setFilteredTabs(temp);
     };
     const timeout = setTimeout(() => {
       queryStorage();
     }, 800);
     return () => clearTimeout(timeout);
-  }, [query, getDatabase]);
+  }, [query, tabs]);
 
   // update DB considering debouce
   useEffect(() => {
@@ -100,13 +96,17 @@ export default function Popup(): JSX.Element {
       <div className="border rounded border-gray-400">
         <input placeholder="Tab title" onChange={handleChangeQuery} />
       </div>
-      <div className="gap-3">
-        {tabs.map((tab) => (
-          <div className="p-3 flex-row items-center gap-x-3">
-            <FaBeer />
-            <div className="flex-1">{tab.title}</div>
-            <FaBeer />
-
+      <div className="gap-y-3">
+        {filteredTabs.map((tab, index) => (
+          <div className="flex p-3 flex-row items-center gap-x-4" key={tab.url}>
+            <img src={getIcon(tab.url)} alt="tab icon" className="w-8 h-8" />
+            <div
+              className="flex flex-1 w-full"
+              onClick={(e) => openAndRemoveTab(e, index)}
+            >
+              {tab.title}
+            </div>
+            <FaTrash onClick={() => { removeTab(index); }} />
           </div>
         ))}
       </div>

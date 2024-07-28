@@ -96,3 +96,14 @@ export function updateUrl(url: string) {
     url,
   });
 }
+
+export function getIcon(url: string) {
+  try {
+    const { origin } = new URL(url);
+    const icon = `https://www.google.com/s2/favicons?sz=64&domain=${origin}`;
+    return icon;
+  } catch (error) {
+    console.error('fail to get icon', error);
+    return 'https://www.google.com/s2/favicons?sz=64&domain=github.com';
+  }
+}
