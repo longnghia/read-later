@@ -58,7 +58,16 @@ async function savePages(highlighted: boolean) {
     const tabs = await getTabsInfo(highlighted);
     const db: Tab[] = (await getValue()).read_later ?? [];
 
-    const newTabs = tabs.filter((tab) => !tabExisted(db, tab));
+    const newTabs: Tab[] = [];
+
+    for (let index = 0; index < tabs.length; index += 1) {
+      const tab = tabs[index];
+      if (tabExisted(db, tab)) {
+        setBadgeBackground('orange');
+      } else {
+        newTabs.push(tab);
+      }
+    }
 
     if (newTabs.length === 0) {
       log('Tabs exist!', tabs);
