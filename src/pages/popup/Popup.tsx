@@ -2,7 +2,9 @@ import { Tab } from '@src/types';
 import { setBadge } from '@src/utils/badge';
 import { getValue, setValue } from '@src/utils/storage';
 import { createTab, getIcon } from '@src/utils/tabs';
-import { useCallback, useEffect, useState } from 'react';
+import {
+  MouseEvent, useCallback, useEffect, useState,
+} from 'react';
 import { FaTrash } from 'react-icons/fa';
 
 export default function Popup(): JSX.Element {
@@ -51,7 +53,7 @@ export default function Popup(): JSX.Element {
     setTabs(temp);
   };
 
-  const openAndRemoveTab = (event: any, index: number) => {
+  const openAndRemoveTab = (event: MouseEvent, index: number) => {
     createTab(tabs[index].url);
 
     if (event.altKey || event.metaKey) {
@@ -92,16 +94,16 @@ export default function Popup(): JSX.Element {
   }, [setStorageAndUpdateBadge, tabs]);
 
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 text-center h-full p-3 bg-gray-800">
-      <div className="border rounded border-gray-400">
+    <div className="absolute top-0 bottom-0 left-0 right-0 h-full p-3 text-center bg-white">
+      <div className="border border-gray-400 rounded">
         <input placeholder="Tab title" onChange={handleChangeQuery} />
       </div>
-      <div className="gap-y-3">
+      <div className="flex flex-col gap-3">
         {filteredTabs.map((tab, index) => (
-          <div className="flex p-3 flex-row items-center gap-x-4" key={tab.url}>
+          <div className="flex flex-row items-center h-[100px] p-3 gap-x-4" key={tab.url}>
             <img src={getIcon(tab.url)} alt="tab icon" className="w-8 h-8" />
             <div
-              className="flex flex-1 w-full"
+              className="flex flex-wrap flex-1 w-full h-full overflow-hidden overflow-ellipsis"
               onClick={(e) => openAndRemoveTab(e, index)}
             >
               {tab.title}
