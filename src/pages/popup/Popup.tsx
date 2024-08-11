@@ -1,3 +1,5 @@
+import emptyIcon from '@assets/img/empty.svg';
+import loadingIcon from '@assets/img/loading.svg';
 import { Tab } from '@src/types';
 import { setBadge } from '@src/utils/badge';
 import { getValue, setValue } from '@src/utils/storage';
@@ -9,7 +11,7 @@ import { FaTrash } from 'react-icons/fa';
 
 export default function Popup(): JSX.Element {
   const [tabs, setTabs] = useState<Tab[]>([]);
-  const [filteredTabs, setFilteredTabs] = useState<Tab[]>([]);
+  const [filteredTabs, setFilteredTabs] = useState<Tab[]>();
   const [query, setQuery] = useState('');
 
   const getDatabase = useCallback(async () => {
@@ -22,10 +24,15 @@ export default function Popup(): JSX.Element {
   // reverse the data to display latest tab on top, and to handle remove item easier
   useEffect(() => {
     async function getTabs() {
-      const storage: Tab[] = await getDatabase();
-      console.log('🚀 ~ getTabs ~ storage:', storage);
-      if (storage) {
-        setTabs([...storage].reverse());
+      try {
+        const storage: Tab[] = await getDatabase();
+
+        console.log('🚀 ~ getTabs ~ storage:', storage);
+        if (storage) {
+          setTabs([...storage].reverse());
+        }
+      } catch (error) {
+        console.error('failed to get data', error);
       }
     }
     getTabs();
@@ -93,22 +100,37 @@ export default function Popup(): JSX.Element {
     return () => clearTimeout(timeout);
   }, [setStorageAndUpdateBadge, tabs]);
 
+  if (!filteredTabs) {
+    return (
+      <div className="flex items-center justify-center w-full h-full p-4">
+        <img src={loadingIcon} className="w-[200px] h-[200px] self-center" alt="empty" />
+      </div>
+    );
+  }
+
+  if (filteredTabs.length === 0) {
+    return (
+      <div className="flex items-center justify-center w-full h-full p-4">
+        <img src={emptyIcon} className="w-[200px] h-[200px] self-center" alt="empty" />
+      </div>
+    );
+  }
+
   return (
     <div className="absolute top-0 bottom-0 left-0 right-0 h-full p-3 text-center bg-white">
-      <div className="border border-gray-400 rounded">
-        <input placeholder="Tab title" onChange={handleChangeQuery} />
-      </div>
+      {/* eslint-disable-next-line jsx-a11y/no-autofocus */}
+      <input placeholder="Tab title" onChange={handleChangeQuery} className="px-3 px-4 text-sm border border-gray-400 rounded" autoFocus />
       <div className="flex flex-col gap-3">
         {filteredTabs.map((tab, index) => (
-          <div className="flex flex-row items-center h-[100px] p-3 gap-x-4" key={tab.url}>
+          <div className="flex flex-row items-center h-[80px] p-3 gap-x-4" key={tab.url}>
             <img src={getIcon(tab.url)} alt="tab icon" className="w-8 h-8" />
             <div
-              className="flex flex-wrap flex-1 w-full h-full overflow-hidden overflow-ellipsis"
+              className="flex flex-wrap items-center flex-1 w-full h-full overflow-hidden text-sm break-words overflow-ellipsis"
               onClick={(e) => openAndRemoveTab(e, index)}
             >
               {tab.title}
             </div>
-            <FaTrash onClick={() => { removeTab(index); }} />
+            <FaTrash onClick={() => { removeTab(index); }} className="text-red-500" />
           </div>
         ))}
       </div>

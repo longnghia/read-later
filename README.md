@@ -21,7 +21,8 @@ It keeps them in a vault that you can recall later
 
 ### Open your json links
 
-
 ## Credits
 
-https://github.com/debdut/browser-extension.git
+- <https://github.com/debdut/browser-extension.git>
+- <https://www.svgbackgrounds.com/elements/animated-svg-preloaders/>
+- <https://www.flaticon.com>
