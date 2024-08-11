@@ -9,12 +9,21 @@ export function setBadge(text: string, onlyCurrent = false) {
   });
 }
 
+export async function setBadgeBackground(color = '#22c55e') {
+  try {
+    const tab = await getCurrentTab();
+    await chrome.browserAction.setBadgeBackgroundColor({ color, tabId: tab.id });
+  } catch (error) {
+    console.error('failed to set badge color', error);
+  }
+}
+
 export function setTemporaryBadge(text: string) {
-  setBadge(text);
   chrome.browserAction.getBadgeText({})
     .then((curBadge) => {
       setTimeout(() => {
         setBadge(curBadge);
       }, 5000);
     });
+  setBadge(text);
 }

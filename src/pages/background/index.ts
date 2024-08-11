@@ -1,5 +1,5 @@
 import { Tab } from '@src/types';
-import { setBadge } from '@src/utils/badge';
+import { setBadge, setBadgeBackground } from '@src/utils/badge';
 import { getValue, setValue } from '@src/utils/storage';
 import {
   createTab,
@@ -72,6 +72,7 @@ async function savePages(highlighted: boolean) {
     await setValue({ read_later: db });
     log(`tabs saved ${newTabs.length} tabs`);
     setBadge(String(db.length));
+    setBadgeBackground('#22c55e');
   } catch (error) {
     onError(error);
   }

@@ -1,7 +1,7 @@
 import emptyIcon from '@assets/img/empty.svg';
 import loadingIcon from '@assets/img/loading.svg';
 import { Tab } from '@src/types';
-import { setBadge } from '@src/utils/badge';
+import { setBadge, setBadgeBackground } from '@src/utils/badge';
 import { getValue, setValue } from '@src/utils/storage';
 import { createTab, getIcon } from '@src/utils/tabs';
 import {
@@ -48,6 +48,7 @@ export default function Popup(): JSX.Element {
     })
       .then(() => {
         updateBadge(newTabs.length);
+        setBadgeBackground('#22c55e');
       })
       .catch((error) => {
         console.error('setStorageAndUpdateBadge', error);
