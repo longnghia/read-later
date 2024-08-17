@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "feat/*"]
+
+jobs:
+
+  build:
+    name: Create artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+      - name: install dependency
+        run: yarn
+      - name: Create Firefox artifacts
+        run: yarn build firefox
+      - uses: actions/upload-artifact@v3
+        with:
+          name: LExtension
+          path: dist/firefox/
