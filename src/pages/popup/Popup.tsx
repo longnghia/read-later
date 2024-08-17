@@ -1,13 +1,13 @@
 import emptyIcon from '@assets/img/empty.svg';
 import loadingIcon from '@assets/img/loading.svg';
+import TabRow from '@src/components/TabRow';
 import { Tab } from '@src/types';
 import { setBadge, setBadgeBackground } from '@src/utils/badge';
 import { getValue, setValue } from '@src/utils/storage';
-import { createTab, getIcon } from '@src/utils/tabs';
+import { createTab } from '@src/utils/tabs';
 import {
   MouseEvent, useCallback, useEffect, useState,
 } from 'react';
-import { FaTrash } from 'react-icons/fa';
 
 export default function Popup(): JSX.Element {
   const [tabs, setTabs] = useState<Tab[]>([]);
@@ -26,8 +26,6 @@ export default function Popup(): JSX.Element {
     async function getTabs() {
       try {
         const storage: Tab[] = await getDatabase();
-
-        console.log('🚀 ~ getTabs ~ storage:', storage);
         if (storage) {
           setTabs([...storage].reverse());
         }
@@ -104,7 +102,11 @@ export default function Popup(): JSX.Element {
   if (!filteredTabs) {
     return (
       <div className="flex items-center justify-center w-full h-full p-4">
-        <img src={loadingIcon} className="w-[200px] h-[200px] self-center" alt="empty" />
+        <img
+          src={loadingIcon}
+          className="w-[200px] h-[200px] self-center"
+          alt="empty"
+        />
       </div>
     );
   }
@@ -112,27 +114,33 @@ export default function Popup(): JSX.Element {
   if (filteredTabs.length === 0) {
     return (
       <div className="flex items-center justify-center w-full h-full p-4">
-        <img src={emptyIcon} className="w-[200px] h-[200px] self-center" alt="empty" />
+        <img
+          src={emptyIcon}
+          className="w-[200px] h-[200px] self-center"
+          alt="empty"
+        />
       </div>
     );
   }
 
   return (
     <div className="absolute top-0 bottom-0 left-0 right-0 h-full p-3 text-center bg-white">
-      {/* eslint-disable-next-line jsx-a11y/no-autofocus */}
-      <input placeholder="Tab title" onChange={handleChangeQuery} className="px-3 px-4 text-sm border border-gray-400 rounded" autoFocus />
+      <input
+        placeholder="Tab title"
+        onChange={handleChangeQuery}
+        className="px-3 px-4 text-sm border border-gray-400 rounded"
+        // eslint-disable-next-line jsx-a11y/no-autofocus
+        autoFocus
+      />
       <div className="flex flex-col gap-3">
         {filteredTabs.map((tab, index) => (
-          <div className="flex flex-row items-center h-[80px] p-3 gap-x-4" key={tab.url}>
-            <img src={getIcon(tab.url)} alt="tab icon" className="w-8 h-8" />
-            <div
-              className="flex flex-wrap items-center flex-1 w-full h-full overflow-hidden text-sm break-words overflow-ellipsis"
-              onClick={(e) => openAndRemoveTab(e, index)}
-            >
-              {tab.title}
-            </div>
-            <FaTrash onClick={() => { removeTab(index); }} className="text-red-500" />
-          </div>
+          <TabRow
+            data={tab}
+            onClick={(e) => openAndRemoveTab(e, index)}
+            onRemove={() => {
+              removeTab(index);
+            }}
+          />
         ))}
       </div>
     </div>
