@@ -12,7 +12,7 @@ const manifest: ManifestTypeV2 = {
   browser_specific_settings: {
     gecko: {
       id: 'read-later@paulcoding.com',
-      strict_min_version: '53a1',
+      strict_min_version: '42.0',
     },
   },
   icons: {
