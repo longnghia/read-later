@@ -78,16 +78,6 @@ function getManifestV2(pageDirMap: { [x: string]: any }): ManifestTypeV2 {
       },
       description: 'open selected in background',
     },
-    log_tabs: {
-      description: "Log current window's tabs",
-    },
-    dublicate_tab: {
-      suggested_key: {
-        default: 'Ctrl+M',
-        mac: 'MacCtrl+M',
-      },
-      description: 'Duplicate a tab',
-    },
   };
 
   return manifest;
