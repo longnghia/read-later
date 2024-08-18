@@ -128,11 +128,11 @@ export default function Popup(): JSX.Element {
       <input
         placeholder="Tab title"
         onChange={handleChangeQuery}
-        className="px-3 px-4 text-sm border border-gray-400 rounded"
+        className="px-4 text-sm border border-gray-400 rounded"
         // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus
       />
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col">
         {filteredTabs.map((tab, index) => (
           <TabRow
             data={tab}

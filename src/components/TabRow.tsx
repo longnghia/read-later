@@ -17,15 +17,19 @@ export default function TabRow({
 }) {
   const { url, title } = data;
   return (
-    <div className="flex flex-row items-center h-[80px] p-3 gap-x-4" key={url}>
-      <img src={getIcon(url)} alt="tab icon" className="w-8 h-8" />
-      <div
-        className="flex flex-wrap items-center flex-1 w-full h-full overflow-hidden text-sm break-words overflow-ellipsis"
-        onClick={onClick}
-      >
-        {title}
+    <div key={url} className="gap-1 p-3 ">
+      <div className="flex flex-row items-center h-[80px] gap-x-4">
+        <img src={getIcon(url)} alt="tab icon" className="w-8 h-8" />
+        <div
+          className="flex flex-wrap items-center w-full h-full overflow-hidden text-sm text-wrap "
+          onClick={onClick}
+        >
+          {title}
+        </div>
+        <FaTrash onClick={onRemove} className="text-red-500" />
       </div>
-      <FaTrash onClick={onRemove} className="text-red-500" />
+      <div className="px-4 h-[4] w-full bg-black" />
     </div>
+
   );
 }
