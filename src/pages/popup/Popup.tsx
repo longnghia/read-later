@@ -132,7 +132,7 @@ export default function Popup(): JSX.Element {
         // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus
       />
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-4">
         {filteredTabs.map((tab, index) => (
           <TabRow
             data={tab}

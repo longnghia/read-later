@@ -8,18 +8,20 @@ It keeps them in a vault that you can recall later
 
 ### Save tabs
 
-- Current tab with `ctrl + b`
-- Hightlighted tabs
+- Save current tab by shortcut `ctrl + b`
 
-### Save groups
+### Open tabs
 
-- Save group of related tabs
+- Click an item to open it in new tab
+- Click plus `cmd/ctrl` will also remove it from read-later
 
-### Export JSON
+<video controls src="docs/read-later.mp4" title="Title"></video>
 
-- Export you DATA
+### TODO
 
-### Open your json links
+- [ ] Save hightlighted tabs
+- [ ] Save groups: Save group of related tabs
+- [ ] Export JSON data
 
 ## Credits
 

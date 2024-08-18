@@ -1,12 +1,12 @@
 {
-  "name": "browser-extension",
-  "displayName": "Browser Extension",
+  "name": "read-later",
+  "displayName": "Read Later",
   "version": "2.0.0",
-  "description": "Browser Extension Boilerplate",
+  "description": "An extension to help you manage your browser tabs effortlessly. Mark tabs to save and read them later!",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/debdut/browser-extension.git"
+    "url": "https://github.com/longnghia/read-later.git"
   },
   "scripts": {
     "start": "NODE_ENV=development node --loader ts-node/esm scripts/build.ts --dev",

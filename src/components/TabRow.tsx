@@ -17,11 +17,11 @@ export default function TabRow({
 }) {
   const { url, title } = data;
   return (
-    <div key={url} className="gap-1 p-3 ">
+    <div key={url} className="gap-1 p-3 hover:cursor-pointer hover:bg-slate-200">
       <div className="flex flex-row items-center h-[80px] gap-x-4">
         <img src={getIcon(url)} alt="tab icon" className="w-8 h-8" />
         <div
-          className="flex flex-wrap items-center w-full h-full overflow-hidden text-sm text-wrap "
+          className="flex flex-wrap items-center w-full h-full overflow-hidden text-sm text-wrap text-start"
           onClick={onClick}
         >
           {title}

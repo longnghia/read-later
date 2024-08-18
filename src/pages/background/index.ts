@@ -164,12 +164,14 @@ function setupOmnibox() {
   // });
 }
 
-const main = async () => {
-  // const storage = await getValue();
-  // const db: Tab[] = storage?.read_later ?? [];
-  // set badge
-  // chrome.browserAction.setBadgeText({ text: `${db.length}` });
+async function setupBadge() {
+  const storage = await getValue();
+  const readlater = storage?.read_later ?? [];
+  setBadge(String(readlater.length));
+}
 
+const main = async () => {
+  setupBadge();
   setupOmnibox();
   setupContextMenu();
   setupListener();
