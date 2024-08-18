@@ -1,17 +1,16 @@
+import { html } from '@esbuilder/html';
+import concurrently from 'concurrently';
+import { build } from 'esbuild';
+import stylePlugin from 'esbuild-style-plugin';
 import fs from 'fs';
+import fse from 'fs-extra';
+import { BrowserPath, GetInstalledBrowsers } from 'get-installed-browsers';
+import watch from 'node-watch';
+import { createRequire } from 'node:module';
 import {
   basename, dirname, relative, resolve, sep,
 } from 'path';
 import { fileURLToPath } from 'url';
-import { createRequire } from 'node:module';
-
-import fse from 'fs-extra';
-import { build } from 'esbuild';
-import { html } from '@esbuilder/html';
-import concurrently from 'concurrently';
-import { GetInstalledBrowsers, BrowserPath } from 'get-installed-browsers';
-import stylePlugin from 'esbuild-style-plugin';
-import watch from 'node-watch';
 
 import { getManifest } from '../src/manifest/index.mjs';
 

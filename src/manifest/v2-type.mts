@@ -8,6 +8,12 @@ export interface ManifestTypeV2 {
   version: string;
   default_locale?: string | undefined;
   description?: string | undefined;
+  browser_specific_settings?: {
+    gecko: {
+      id: string,
+      strict_min_version: string,
+    },
+  };
   icons?: chrome.runtime.ManifestIcons | undefined;
   author?: string | undefined;
   background?: {
