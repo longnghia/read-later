@@ -26,5 +26,5 @@ jobs:
         run: yarn build firefox
       - uses: actions/upload-artifact@v3
         with:
-          name: LExtension
+          name: read-later
           path: dist/v2/
