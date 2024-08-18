@@ -20,6 +20,8 @@ jobs:
           node-version: '21'
       - name: install dependency
         run: yarn
+      - name: create dist path
+        run: mkdir -p dist/v2
       - name: Create Firefox artifacts
         run: yarn build firefox
       - uses: actions/upload-artifact@v3
