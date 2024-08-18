@@ -445,7 +445,7 @@ function GetArgs(): { browsers: string[], dev: boolean } {
   // }
 
   let browsers: string[];
-  let dev = false;
+  let dev = process.env.NODE_ENV === 'development';
 
   if (process.argv[2] === '--dev') {
     browsers = process.argv
