@@ -22,7 +22,7 @@
     "webextension-polyfill": "^0.10.0"
   },
   "devDependencies": {
-    "@chialab/esbuild-plugin-html": "^0.18.2",
+    "@esbuilder/html": "^0.0.6",
     "@types/chrome": "^0.0.209",
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^18.11.18",
