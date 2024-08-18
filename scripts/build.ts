@@ -4,10 +4,9 @@ import {
 } from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'node:module';
-
+import htmlPlugin from '@chialab/esbuild-plugin-html';
 import fse from 'fs-extra';
 import { build } from 'esbuild';
-import { html } from '@esbuilder/html';
 import concurrently from 'concurrently';
 import { GetInstalledBrowsers, BrowserPath } from 'get-installed-browsers';
 import stylePlugin from 'esbuild-style-plugin';
@@ -123,9 +122,7 @@ async function buildHtmlPage(name: string, entry: string, outdir: string, dev = 
     },
     assetNames: '[name]',
     plugins: [
-      html({
-        entryNames: '[name]-[hash]',
-      }),
+      htmlPlugin(),
       stylePlugin({
         postcss: {
           plugins: [

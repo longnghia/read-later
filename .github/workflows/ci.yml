@@ -25,4 +25,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: LExtension
-          path: dist/firefox/
+          path: dist/v2/

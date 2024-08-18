@@ -9,6 +9,12 @@ const manifest: ManifestTypeV2 = {
   name: pkg.displayName,
   version: pkg.version,
   description: pkg.description,
+  browser_specific_settings: {
+    gecko: {
+      id: 'read-later@paulcoding.com',
+      strict_min_version: '53a1',
+    },
+  },
   icons: {
     128: 'public/icon-128.png',
   },
