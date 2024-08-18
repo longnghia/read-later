@@ -15,7 +15,15 @@ It keeps them in a vault that you can recall later
 - Click an item to open it in new tab
 - Click plus `cmd/ctrl` will also remove it from read-later
 
-<video controls src="docs/read-later.mp4" title="Title"></video>
+<video controls src="docs/read-later.mp4" title="Read Later" width=500></video>
+
+## Development
+
+- Install dependencies: `yarn`
+- Development Build: `yarn start firefox`
+- Production Build: `yarn build firefox`
+  
+  Production Build is located in `dist/v2`
 
 ### TODO
 
@@ -28,3 +36,8 @@ It keeps them in a vault that you can recall later
 - <https://github.com/debdut/browser-extension.git>
 - <https://www.svgbackgrounds.com/elements/animated-svg-preloaders/>
 - <https://www.flaticon.com>
+
+
+## License
+
+MIT
