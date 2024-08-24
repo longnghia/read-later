@@ -1,10 +1,29 @@
 # Read Later
 
+***
+
+<h1 align="center">
+<sub>
+<img src="https://raw.githubusercontent.com/longnghia/read-later/main/public/icon-128.png" height="38" width="38">
+</sub>
+Read Later
+</h1>
+
+***
+
+<p align="center">
+<a href="https://addons.mozilla.org/en-US/firefox/addon/read-it-later/"><img src="https://raw.githubusercontent.com/longnghia/read-later/main/public/icon-128.png" alt="Get Read Later for Firefox"></a>
+</p>
+
+***
+
 ------------
 Read Later is an extension to manage your bunch of browser's tabs.
 It keeps them in a vault that you can recall later
 
 ## Features
+
+[demo.webm](https://github.com/user-attachments/assets/577d4ba1-2979-4b23-9cc9-8e0e521612ba)
 
 ### Save tabs
 
@@ -15,14 +34,12 @@ It keeps them in a vault that you can recall later
 - Click an item to open it in new tab
 - Click plus `cmd/ctrl` will also remove it from read-later
 
-<video controls src="docs/read-later.mp4" title="Read Later" width=500></video>
-
 ## Development
 
 - Install dependencies: `yarn`
 - Development Build: `yarn start firefox`
 - Production Build: `yarn build firefox`
-  
+
   Production Build is located in `dist/v2`
 
 ### TODO
@@ -38,6 +55,6 @@ It keeps them in a vault that you can recall later
 - <https://www.flaticon.com>
 
 
-## License
+## License`
 
-MIT
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
