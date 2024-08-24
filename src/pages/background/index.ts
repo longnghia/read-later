@@ -1,5 +1,6 @@
 import { Tab } from '@src/types';
 import { setBadge, setBadgeBackground } from '@src/utils/badge';
+import { isDev } from '@src/utils/env';
 import { getValue, setValue } from '@src/utils/storage';
 import {
   createTab,
@@ -124,18 +125,20 @@ function setupCommands() {
 }
 
 function setupContextMenu() {
-  chrome.contextMenus.create({
-    id: 'debug',
-    title: 'Debug',
-    contexts: ['browser_action'],
-    onclick: () => {
-      createTab(chrome.runtime.getURL('_generated_background_page.html'), true);
-    },
-    icons: {
-      16: '../../assets/img/malware16.png',
-      32: '../../assets/img/malware32.png',
-    },
-  } as chrome.contextMenus.CreateProperties);
+  if (isDev) {
+    chrome.contextMenus.create({
+      id: 'debug',
+      title: 'Debug',
+      contexts: ['browser_action'],
+      onclick: () => {
+        createTab(chrome.runtime.getURL('_generated_background_page.html'), true);
+      },
+      icons: {
+        16: '../../assets/img/malware16.png',
+        32: '../../assets/img/malware32.png',
+      },
+    } as chrome.contextMenus.CreateProperties);
+  }
 
   chrome.contextMenus.create({
     id: 'popup',
