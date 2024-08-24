@@ -20,12 +20,12 @@ export default function Popup(): JSX.Element {
     }
   };
   return (
-    <div className="absolute top-0 bottom-0 left-0 right-0 h-full text-center bg-white">
-      <div className="self-center items-center justify-center flex-row gap-4 m-4">
+    <div className="absolute top-0 bottom-0 left-0 right-0 h-full bg-white">
+      <div className="flex-row items-center self-center justify-center gap-4 m-4">
         <Checkbox value="tabs" mode={mode} label="Tabs" onChange={() => setMode('tabs')} />
         <Checkbox value="groups" mode={mode} label="Groups" onChange={() => setMode('groups')} />
       </div>
-      <div className=" p-3 ">
+      <div className="p-3 ">
         {renderContent()}
       </div>
     </div>
