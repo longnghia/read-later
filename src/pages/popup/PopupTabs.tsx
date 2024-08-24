@@ -135,6 +135,7 @@ export default function PopupTabs(): JSX.Element {
       <div className="flex flex-col mt-4">
         {filteredTabs.map((tab, index) => (
           <TabRow
+            key={tab.url}
             data={tab}
             onClick={(e) => openAndRemoveTab(e, index)}
             onRemove={() => {
