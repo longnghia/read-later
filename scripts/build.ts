@@ -165,6 +165,7 @@ async function buildJSPage(name: string, entry: string, outdir: string, dev = fa
     outdir: resolve(outdir, name),
     sourcemap: dev,
     minify: true,
+    define: { 'process.env.NODE_ENV': dev ? '"development"' : '"production"' },
     target: ['chrome58', 'firefox57', 'safari11', 'edge18'],
     loader: {
       '.png': 'dataurl',
