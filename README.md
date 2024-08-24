@@ -1,4 +1,5 @@
-# Read Later
+[![Badge Commits]][Commit Rate]
+[![Badge Mozilla]][Mozilla]
 
 ***
 
@@ -12,7 +13,7 @@ Read Later
 ***
 
 <p align="center">
-<a href="https://addons.mozilla.org/en-US/firefox/addon/read-it-later/"><img src="https://raw.githubusercontent.com/longnghia/read-later/main/public/icon-128.png" alt="Get Read Later for Firefox"></a>
+<a href="https://addons.mozilla.org/en-US/firefox/addon/read-it-later/"><img src="https://github.com/user-attachments/assets/a89c4124-119a-4147-822d-23ac1e831d18" alt="Get Read Later for Firefox"></a>
 </p>
 
 ***
