@@ -61,6 +61,10 @@ Save tabs by shortcut and revisit them at your convenience, making it simple to 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 
+<!---------------------------------[ Internal ]-------------------------------->
+
+[Commit Rate]: https://github.com/longnghia/read-later/commits/main
+[Mozilla]: https://addons.mozilla.org/addon/read-it-later/
 
 <!----------------------------------[ Badges ]--------------------------------->
 
