@@ -10,6 +10,9 @@
 Read Later
 </h1>
 
+Read Later helps you to easily manage multiple tabs.
+Save tabs by shortcut and revisit them at your convenience, making it simple to stay organized and never lose track of important pages.
+
 ***
 
 <p align="center">
@@ -18,9 +21,6 @@ Read Later
 
 ***
 
-------------
-Read Later is an extension to manage your bunch of browser's tabs.
-It keeps them in a vault that you can recall later
 
 ## Features
 
@@ -59,3 +59,10 @@ It keeps them in a vault that you can recall later
 ## License`
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+
+
+<!----------------------------------[ Badges ]--------------------------------->
+
+[Badge Commits]: https://img.shields.io/github/commit-activity/m/longnghia/read-later?label=Commits
+[Badge Mozilla]: https://img.shields.io/amo/rating/read-it-later?label=Firefox
