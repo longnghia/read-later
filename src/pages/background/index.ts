@@ -1,6 +1,6 @@
 import { Tab } from '@src/types';
 import { setBadge, setBadgeBackground } from '@src/utils/badge';
-import { isDev } from '@src/utils/env';
+import { isProd } from '@src/utils/env';
 import { getValue, setValue } from '@src/utils/storage';
 import {
   createTab,
@@ -9,6 +9,7 @@ import {
   saveTabs,
 } from '@src/utils/tabs';
 import { Command } from '../types';
+import devdb from './devdb';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-console
 const log = (...args: any) => console.log('[background]', args);
@@ -125,20 +126,20 @@ function setupCommands() {
 }
 
 function setupContextMenu() {
-  if (isDev) {
-    chrome.contextMenus.create({
-      id: 'debug',
-      title: 'Debug',
-      contexts: ['browser_action'],
-      onclick: () => {
-        createTab(chrome.runtime.getURL('_generated_background_page.html'), true);
-      },
-      icons: {
-        16: '../../assets/img/malware16.png',
-        32: '../../assets/img/malware32.png',
-      },
-    } as chrome.contextMenus.CreateProperties);
-  }
+  if (isProd) return;
+
+  chrome.contextMenus.create({
+    id: 'debug',
+    title: 'Debug',
+    contexts: ['browser_action'],
+    onclick: () => {
+      createTab(chrome.runtime.getURL('_generated_background_page.html'), true);
+    },
+    icons: {
+      16: '../../assets/img/malware16.png',
+      32: '../../assets/img/malware32.png',
+    },
+  } as chrome.contextMenus.CreateProperties);
 
   chrome.contextMenus.create({
     id: 'popup',
@@ -173,7 +174,12 @@ async function setupBadge() {
   setBadge(String(readlater.length));
 }
 
+async function setupDevDB() {
+  await setValue(devdb);
+}
+
 const main = async () => {
+  await setupDevDB();
   setupBadge();
   setupOmnibox();
   setupContextMenu();
