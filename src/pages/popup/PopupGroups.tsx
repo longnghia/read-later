@@ -95,7 +95,7 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
     setStorage(groups);
   }, [setStorage, groups]);
 
-  if (!filteredGroups) {
+  if (!filteredGroups && !query) {
     return (
       <div className="flex items-center justify-center w-full h-full p-4">
         <img

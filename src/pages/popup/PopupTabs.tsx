@@ -111,7 +111,7 @@ export default function PopupTabs(): JSX.Element {
     );
   }
 
-  if (filteredTabs.length === 0) {
+  if (filteredTabs.length === 0 && !query) {
     return (
       <div className="flex items-center justify-center w-full h-full p-4">
         <img
