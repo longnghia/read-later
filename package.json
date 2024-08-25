@@ -10,11 +10,13 @@
   },
   "scripts": {
     "start": "NODE_ENV=development node --loader ts-node/esm scripts/build.ts --dev",
-    "build": "NODE_ENV=production node --loader ts-node/esm scripts/build.ts"
+    "build": "NODE_ENV=production node --loader ts-node/esm scripts/build.ts",
+    "postinstall": "patch-package"
   },
   "type": "module",
   "dependencies": {
     "@types/webextension-polyfill": "^0.10.0",
+    "patch-package": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.1",
