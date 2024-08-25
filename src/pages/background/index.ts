@@ -175,6 +175,7 @@ async function setupBadge() {
 }
 
 async function setupDevDB() {
+  if (isProd) return;
   await setValue(devdb);
 }
 
