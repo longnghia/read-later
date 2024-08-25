@@ -42,7 +42,7 @@ export default function PopupGroups(): JSX.Element {
   const removeGroup = async (groupName: string) => {
     const temp = { ...groups };
     if (temp[groupName]) {
-      delete temp.groupName;
+      delete temp[groupName];
       setGroups(temp);
     } else {
       onError(`no group ${groupName}`);

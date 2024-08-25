@@ -39,7 +39,6 @@ export default function GroupView({
 
   // TODO: manuplate urls
   // TODO: popup remove
-  // TODO: fix icon onclick not working
 
   return (
     <div>
@@ -48,9 +47,9 @@ export default function GroupView({
           {name}
         </div>
         {expanded ? (
-          <FaCaretUp className="hover:cursor-pointer" onClick={onExpand} />
+          <FaCaretUp className="hover:cursor-pointer" onClick={onCollapse} />
         ) : (
-          <FaCaretDown className="hover:cursor-pointer" onClick={onCollapse} />
+          <FaCaretDown className="hover:cursor-pointer" onClick={onExpand} />
         )}
         <div className="flex-1" />
         <FaTrash
