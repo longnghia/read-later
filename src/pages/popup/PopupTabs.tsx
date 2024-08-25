@@ -105,7 +105,7 @@ export default function PopupTabs(): JSX.Element {
         <img
           src={loadingIcon}
           className="w-[200px] h-[200px] self-center"
-          alt="empty"
+          alt="loading"
         />
       </div>
     );
@@ -113,12 +113,18 @@ export default function PopupTabs(): JSX.Element {
 
   if (filteredTabs.length === 0 && !query) {
     return (
-      <div className="flex items-center justify-center w-full h-full p-4">
+      <div className="flex flex-col items-center justify-center w-full h-full gap-4 p-4">
         <img
           src={emptyIcon}
           className="w-[200px] h-[200px] self-center"
           alt="empty"
         />
+        <span>
+          Add a tab by
+          {' '}
+          <code>control + b</code>
+          !
+        </span>
       </div>
     );
   }

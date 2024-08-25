@@ -79,6 +79,22 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
     [],
   );
 
+  const renderNewGroup = () => {
+    if (newGroup === null) return null;
+    return (
+      <div className="mt-12">
+        {/* eslint-disable-next-line jsx-a11y/no-autofocus */}
+        <input value={newGroup} onChange={(e) => setNewGroup(e.target.value)} autoFocus />
+        <GroupView
+          name={newGroup}
+          urls={[]}
+          isEditMode
+          onUpdate={(newUrls) => { updateGroup(newGroup, newUrls); }}
+        />
+      </div>
+    );
+  };
+
   // update groups on query
   useEffect(() => {
     const queryStorage = async () => {
@@ -100,57 +116,31 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
     setStorage(groups);
   }, [setStorage, groups]);
 
-  if (!filteredGroups && !query) {
-    return (
-      <div className="flex items-center justify-center w-full h-full p-4">
-        <img
-          src={loadingIcon}
-          className="w-[200px] h-[200px] self-center"
-          alt="empty"
-        />
-      </div>
-    );
-  }
-
   if (!filteredGroups) {
     return (
       <div className="flex items-center justify-center w-full h-full p-4">
         <img
           src={loadingIcon}
           className="w-[200px] h-[200px] self-center"
-          alt="empty"
+          alt="loading"
         />
       </div>
     );
   }
 
-  if (filteredGroupNames.length === 0) {
+  if (filteredGroupNames.length === 0 && !newGroup && !query) {
     return (
-      <div className="flex items-center justify-center w-full h-full p-4">
+      <div className="flex flex-col items-center justify-center w-full h-full gap-4 p-4">
         <img
           src={emptyIcon}
           className="w-[200px] h-[200px] self-center"
           alt="empty"
         />
+        <span>Add New Group!</span>
+        <FaPlusCircle className="hover:cursor-pointer" onClick={() => { setNewGroup('New group'); }} />
       </div>
     );
   }
-
-  const renderNewGroup = () => {
-    if (newGroup === null) return null;
-    return (
-      <div className="mt-12">
-        {/* eslint-disable-next-line jsx-a11y/no-autofocus */}
-        <input value={newGroup} onChange={(e) => setNewGroup(e.target.value)} autoFocus />
-        <GroupView
-          name={newGroup}
-          urls={[]}
-          isEditMode
-          onUpdate={(newUrls) => { updateGroup(newGroup, newUrls); }}
-        />
-      </div>
-    );
-  };
 
   return (
     <div>
