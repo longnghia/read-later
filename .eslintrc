@@ -32,6 +32,9 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "import/no-unresolved": "error",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "react/require-default-props": "off",
     "no-console": "warn",
     "react/jsx-filename-extension": [
       2,

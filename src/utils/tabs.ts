@@ -50,6 +50,33 @@ export async function getCurrentTab() {
 
 /**
  *
+ * @param url tabs to open
+ */
+export function createTabs(urls: string[]) {
+  chrome.tabs.query(
+    {
+      active: true,
+      currentWindow: true,
+    },
+    (tabs) => {
+      const currentTab = tabs[0];
+
+      urls.forEach((url, index) => {
+        if (url) {
+          chrome.tabs.create({
+            active: false,
+            openerTabId: currentTab.id,
+            index: currentTab.index + index + 1,
+            url,
+          });
+        }
+      });
+    },
+  );
+}
+
+/**
+ *
  * @param url tab to open
  * @param active new tab is focused if active = true
  */

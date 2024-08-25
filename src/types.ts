@@ -3,3 +3,5 @@ export type Tab = {
   url: string
   date: number
 }
+
+export type Groups = {[key: string]: string[]}
