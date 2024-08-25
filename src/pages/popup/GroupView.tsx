@@ -38,7 +38,6 @@ export default function GroupView({
   };
 
   // TODO: manuplate urls
-  // TODO: popup remove
 
   return (
     <div>

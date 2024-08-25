@@ -5,6 +5,7 @@ import { getValue, setValue } from '@src/utils/storage';
 import {
   useCallback, useEffect, useState,
 } from 'react';
+import Modal from 'react-modal';
 import GroupView from './GroupView';
 import useError from './useError';
 
@@ -12,6 +13,7 @@ export default function PopupGroups(): JSX.Element {
   const [groups, setGroups] = useState<Groups>({});
   const [filteredGroups, setFilteredGroups] = useState<Groups>();
   const [query, setQuery] = useState('');
+  const [selectedGroup, setSelectGroup] = useState<string|null>(null);
 
   const { error, onError } = useError();
   const filteredGroupNames = Object.keys(filteredGroups ?? {});
@@ -39,14 +41,20 @@ export default function PopupGroups(): JSX.Element {
       .catch(onError);
   }, [onError]);
 
-  const removeGroup = async (groupName: string) => {
+  const removeGroup = async () => {
+    if (!selectedGroup) return;
     const temp = { ...groups };
-    if (temp[groupName]) {
-      delete temp[groupName];
+    if (temp[selectedGroup]) {
+      delete temp[selectedGroup];
       setGroups(temp);
     } else {
-      onError(`no group ${groupName}`);
+      onError(`no group ${selectedGroup}`);
     }
+    setSelectGroup(null);
+  };
+
+  const closeModal = () => {
+    setSelectGroup(null);
   };
 
   const handleChangeQuery = useCallback(
@@ -125,12 +133,28 @@ export default function PopupGroups(): JSX.Element {
           <GroupView
             key={groupName}
             name={groupName}
-            onRemove={() => { removeGroup(groupName); }}
+            onRemove={() => { setSelectGroup(groupName); }}
             urls={filteredGroups[groupName]}
           />
         ))}
       </div>
       {error ? <div className="text-red-500">{error}</div> : null}
+      <Modal
+        isOpen={!!selectedGroup}
+        onRequestClose={() => { setSelectGroup(null); }}
+        contentLabel="Remove Group"
+      >
+        <span className="text-center">
+          Are you sure to remove
+          <b>
+            {` ${selectedGroup}?`}
+          </b>
+        </span>
+        <div className="flex flex-row items-center justify-around flex-1 gap-4 p-4">
+          <button className="p-3 border border-black rounded-lg" type="button" onClick={closeModal}>Cancel</button>
+          <button className="p-3 text-white bg-red-500 rounded-lg" type="button" onClick={removeGroup}>Confirm</button>
+        </div>
+      </Modal>
     </div>
   );
 }
