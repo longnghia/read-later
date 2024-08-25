@@ -6,6 +6,7 @@ import toast from '@src/utils/toast';
 import {
   useCallback, useEffect, useState,
 } from 'react';
+import { FaPlusCircle } from 'react-icons/fa';
 import Modal from 'react-modal';
 import GroupView from './GroupView';
 import useError from './useError';
@@ -15,7 +16,7 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
   const [filteredGroups, setFilteredGroups] = useState<Groups>();
   const [query, setQuery] = useState('');
   const [selectedGroup, setSelectGroup] = useState<string|null>(null);
-
+  const [newGroup, setNewGroup] = useState<string| null>(null);
   const { error, onError } = useError();
   const filteredGroupNames = Object.keys(filteredGroups ?? {});
 
@@ -55,9 +56,13 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
     }
     setSelectGroup(null);
   };
+
   const updateGroup = (groupName: string, newUrls: string[]) => {
     setGroups({ ...groups, [groupName]: newUrls });
     toast({ title: 'Saved!', text: groupName, icon: 'success' });
+    if (newGroup) {
+      setNewGroup(null);
+    }
   };
 
   const closeModal = () => {
@@ -126,15 +131,35 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
     );
   }
 
+  const renderNewGroup = () => {
+    if (newGroup === null) return null;
+    return (
+      <div className="mt-12">
+        {/* eslint-disable-next-line jsx-a11y/no-autofocus */}
+        <input value={newGroup} onChange={(e) => setNewGroup(e.target.value)} autoFocus />
+        <GroupView
+          name={newGroup}
+          urls={[]}
+          isEditMode
+          onUpdate={(newUrls) => { updateGroup(newGroup, newUrls); }}
+        />
+      </div>
+    );
+  };
+
   return (
     <div>
-      <input
-        placeholder="Groups title"
-        onChange={handleChangeQuery}
-        className="px-4 text-sm border border-gray-400 rounded"
+      <div className="flex flex-row items-center gap-4">
+        <input
+          placeholder="Groups title"
+          onChange={handleChangeQuery}
+          className="px-4 text-sm border border-gray-400 rounded"
         // eslint-disable-next-line jsx-a11y/no-autofocus
-        autoFocus
-      />
+          autoFocus
+        />
+        <FaPlusCircle onClick={() => { setNewGroup('New group'); }} />
+      </div>
+      {renderNewGroup()}
       <div className="flex flex-col mt-4">
         {filteredGroupNames.map((groupName) => (
           <GroupView

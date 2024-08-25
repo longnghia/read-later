@@ -16,7 +16,7 @@ export default function GroupView({
 }: {
   name: string;
   urls: string[];
-  onRemove: () => void;
+  onRemove?: () => void | undefined;
   onUpdate: (data: string[]) => void;
   isEditMode: boolean
 }) {
@@ -63,7 +63,7 @@ export default function GroupView({
         <div className="hover:cursor-pointer" onClick={openUrls}>
           {name}
         </div>
-        {expanded ? (
+        {!isEditMode && expanded ? (
           <FaCaretUp className="hover:cursor-pointer" onClick={onCollapse} />
         ) : (
           <FaCaretDown className="hover:cursor-pointer" onClick={onExpand} />
@@ -72,10 +72,12 @@ export default function GroupView({
         {!isEditMode ? (
           <FaEdit onClick={openEditPage} />
         ) : null}
-        <FaTrash
-          className="text-red-500 hover:cursor-pointer"
-          onClick={onRemove}
-        />
+        {onRemove ? (
+          <FaTrash
+            className="text-red-500 hover:cursor-pointer"
+            onClick={onRemove}
+          />
+        ) : null}
       </div>
       {!isEditMode ? renderUrls() : renderTextArea() }
     </div>

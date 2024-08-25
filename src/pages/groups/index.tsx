@@ -1,5 +1,5 @@
-import { createRoot } from 'react-dom/client';
 import '@assets/styles/tailwind.css';
+import { createRoot } from 'react-dom/client';
 import ReactModal from 'react-modal';
 import PopupGroups from '../popup/PopupGroups';
 
