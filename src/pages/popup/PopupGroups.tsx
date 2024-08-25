@@ -2,11 +2,12 @@ import emptyIcon from '@assets/img/empty.svg';
 import loadingIcon from '@assets/img/loading.svg';
 import { Groups } from '@src/types';
 import { getValue, setValue } from '@src/utils/storage';
+import { createTab } from '@src/utils/tabs';
 import toast from '@src/utils/toast';
 import {
   useCallback, useEffect, useState,
 } from 'react';
-import { FaPlusCircle } from 'react-icons/fa';
+import { FaEdit, FaPlusCircle } from 'react-icons/fa';
 import Modal from 'react-modal';
 import GroupView from './GroupView';
 import useError from './useError';
@@ -63,6 +64,10 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
     if (newGroup) {
       setNewGroup(null);
     }
+  };
+
+  const openEditPage = () => {
+    createTab(chrome.runtime.getURL('groups/index.html'), true);
   };
 
   const closeModal = () => {
@@ -158,6 +163,9 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
           autoFocus
         />
         <FaPlusCircle onClick={() => { setNewGroup('New group'); }} />
+        {!isEditMode ? (
+          <FaEdit onClick={openEditPage} />
+        ) : null}
       </div>
       {renderNewGroup()}
       <div className="flex flex-col mt-4">

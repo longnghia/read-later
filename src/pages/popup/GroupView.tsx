@@ -1,8 +1,8 @@
 import { isDev } from '@src/utils/env';
-import { createTab, createTabs } from '@src/utils/tabs';
+import { createTabs } from '@src/utils/tabs';
 import { useState } from 'react';
 import {
-  FaCaretDown, FaCaretUp, FaEdit,
+  FaCaretDown, FaCaretUp,
   FaTrash,
 } from 'react-icons/fa';
 import GroupEdit from './GroupEdit';
@@ -29,10 +29,6 @@ export default function GroupView({
   const onCollapse = () => {
     setExpanded(false);
   };
-  const openEditPage = () => {
-    createTab(chrome.runtime.getURL('groups/index.html'), true);
-  };
-
   const updateGroup = (data: string[]) => {
     setUrls(data);
     onUpdate(data);
@@ -69,9 +65,6 @@ export default function GroupView({
           <FaCaretDown className="hover:cursor-pointer" onClick={onExpand} />
         )}
         <div className="flex-1" />
-        {!isEditMode ? (
-          <FaEdit onClick={openEditPage} />
-        ) : null}
         {onRemove ? (
           <FaTrash
             className="text-red-500 hover:cursor-pointer"
