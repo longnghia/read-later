@@ -1,16 +1,24 @@
 import { isDev } from '@src/utils/env';
-import { createTabs } from '@src/utils/tabs';
+import { createTab, createTabs } from '@src/utils/tabs';
 import { useState } from 'react';
-import { FaCaretDown, FaCaretUp, FaTrash } from 'react-icons/fa';
+import {
+  FaCaretDown, FaCaretUp, FaEdit,
+  FaTrash,
+} from 'react-icons/fa';
+import GroupEdit from './GroupEdit';
 
 export default function GroupView({
   name,
   urls: initialUrls = [],
   onRemove,
+  onUpdate,
+  isEditMode = false,
 }: {
   name: string;
   urls: string[];
   onRemove: () => void;
+  onUpdate: (data: string[]) => void;
+  isEditMode: boolean
 }) {
   const [expanded, setExpanded] = useState(isDev);
   const [urls, setUrls] = useState(initialUrls);
@@ -20,6 +28,14 @@ export default function GroupView({
   };
   const onCollapse = () => {
     setExpanded(false);
+  };
+  const openEditPage = () => {
+    createTab(chrome.runtime.getURL('groups/index.html'), true);
+  };
+
+  const updateGroup = (data: string[]) => {
+    setUrls(data);
+    onUpdate(data);
   };
 
   const renderUrls = () => {
@@ -33,11 +49,13 @@ export default function GroupView({
     );
   };
 
+  const renderTextArea = () => (
+    <GroupEdit urls={urls} onSubmit={updateGroup} />
+  );
+
   const openUrls = async () => {
     createTabs(urls);
   };
-
-  // TODO: manuplate urls
 
   return (
     <div>
@@ -51,12 +69,15 @@ export default function GroupView({
           <FaCaretDown className="hover:cursor-pointer" onClick={onExpand} />
         )}
         <div className="flex-1" />
+        {!isEditMode ? (
+          <FaEdit onClick={openEditPage} />
+        ) : null}
         <FaTrash
           className="text-red-500 hover:cursor-pointer"
           onClick={onRemove}
         />
       </div>
-      {renderUrls()}
+      {!isEditMode ? renderUrls() : renderTextArea() }
     </div>
   );
 }

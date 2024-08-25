@@ -2,6 +2,7 @@ import emptyIcon from '@assets/img/empty.svg';
 import loadingIcon from '@assets/img/loading.svg';
 import { Groups } from '@src/types';
 import { getValue, setValue } from '@src/utils/storage';
+import toast from '@src/utils/toast';
 import {
   useCallback, useEffect, useState,
 } from 'react';
@@ -9,7 +10,7 @@ import Modal from 'react-modal';
 import GroupView from './GroupView';
 import useError from './useError';
 
-export default function PopupGroups(): JSX.Element {
+export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.Element {
   const [groups, setGroups] = useState<Groups>({});
   const [filteredGroups, setFilteredGroups] = useState<Groups>();
   const [query, setQuery] = useState('');
@@ -47,10 +48,16 @@ export default function PopupGroups(): JSX.Element {
     if (temp[selectedGroup]) {
       delete temp[selectedGroup];
       setGroups(temp);
+      toast({ title: 'Removed!', text: selectedGroup, icon: 'success' });
     } else {
       onError(`no group ${selectedGroup}`);
+      toast({ title: 'Error!', icon: 'error' });
     }
     setSelectGroup(null);
+  };
+  const updateGroup = (groupName: string, newUrls: string[]) => {
+    setGroups({ ...groups, [groupName]: newUrls });
+    toast({ title: 'Saved!', text: groupName, icon: 'success' });
   };
 
   const closeModal = () => {
@@ -134,7 +141,9 @@ export default function PopupGroups(): JSX.Element {
             key={groupName}
             name={groupName}
             onRemove={() => { setSelectGroup(groupName); }}
+            onUpdate={(newUrls) => { updateGroup(groupName, newUrls); }}
             urls={filteredGroups[groupName]}
+            isEditMode={isEditMode}
           />
         ))}
       </div>

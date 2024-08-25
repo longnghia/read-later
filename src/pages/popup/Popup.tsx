@@ -7,14 +7,14 @@ import PopupTabs from './PopupTabs';
 import { PopupMode } from './types';
 
 export default function Popup(): JSX.Element {
-  const [mode, setMode] = useState<PopupMode>('tabs');
+  const [mode, setMode] = useState<PopupMode>('groups');
 
   const renderContent = () => {
     switch (mode) {
       case 'tabs':
         return <PopupTabs />;
       case 'groups':
-        return <PopupGroups />;
+        return <PopupGroups isEditMode={false} />;
       default:
         return null;
     }

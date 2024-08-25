@@ -1,11 +1,11 @@
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 
-const toast = (text: string, timeout = 1500) => {
+const toast = (options :SweetAlertOptions) => {
   const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: timeout,
+    timer: 1500,
     timerProgressBar: true,
     didOpen: (_toast) => {
       _toast.addEventListener('mouseenter', Swal.stopTimer);
@@ -17,8 +17,7 @@ const toast = (text: string, timeout = 1500) => {
     customClass: {
       container: 'swal2-small',
     },
-    icon: 'success',
-    title: text,
+    ...options,
   });
 };
 
