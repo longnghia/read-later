@@ -21,19 +21,17 @@ Save tabs by shortcut and revisit them at your convenience, making it simple to 
 
 ***
 
-
 ## Features
 
 [demo.webm](https://github.com/user-attachments/assets/577d4ba1-2979-4b23-9cc9-8e0e521612ba)
 
-### Save tabs
+- Save tabs
+  - Save current tab by shortcut `ctrl + b`
+  - Click an item to open it in new tab
+  - Click plus `cmd/ctrl` will also remove it from read-later
 
-- Save current tab by shortcut `ctrl + b`
-
-### Open tabs
-
-- Click an item to open it in new tab
-- Click plus `cmd/ctrl` will also remove it from read-later
+- Save groups
+  - Manage groups of related tabs
 
 ## Development
 
@@ -46,7 +44,6 @@ Save tabs by shortcut and revisit them at your convenience, making it simple to 
 ### TODO
 
 - [ ] Save hightlighted tabs
-- [ ] Save groups: Save group of related tabs
 - [ ] Export JSON data
 
 ## Credits
@@ -55,11 +52,9 @@ Save tabs by shortcut and revisit them at your convenience, making it simple to 
 - <https://www.svgbackgrounds.com/elements/animated-svg-preloaders/>
 - <https://www.flaticon.com>
 
-
 ## License`
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 
 <!---------------------------------[ Internal ]-------------------------------->
 
