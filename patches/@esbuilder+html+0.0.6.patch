@@ -1,0 +1,13 @@
+diff --git a/node_modules/@esbuilder/html/lib/html.mjs b/node_modules/@esbuilder/html/lib/html.mjs
+index 59e9470..8b62130 100644
+--- a/node_modules/@esbuilder/html/lib/html.mjs
++++ b/node_modules/@esbuilder/html/lib/html.mjs
+@@ -44,7 +44,7 @@ import _esbuild from "esbuild";
+ // packages/html/src/loader.ts
+ import fs from "fs";
+ import path from "path";
+-import cheerio from "cheerio";
++import * as cheerio from "cheerio";
+ var { readFile } = fs.promises;
+ var VALID_SCRIPT_TYPES = /* @__PURE__ */ new Set([
+   "application/javascript",

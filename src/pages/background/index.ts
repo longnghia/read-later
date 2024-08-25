@@ -1,5 +1,6 @@
 import { Tab } from '@src/types';
 import { setBadge, setBadgeBackground } from '@src/utils/badge';
+import { isProd } from '@src/utils/env';
 import { getValue, setValue } from '@src/utils/storage';
 import {
   createTab,
@@ -8,6 +9,7 @@ import {
   saveTabs,
 } from '@src/utils/tabs';
 import { Command } from '../types';
+import devdb from './devdb';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-console
 const log = (...args: any) => console.log('[background]', args);
@@ -124,6 +126,8 @@ function setupCommands() {
 }
 
 function setupContextMenu() {
+  if (isProd) return;
+
   chrome.contextMenus.create({
     id: 'debug',
     title: 'Debug',
@@ -170,7 +174,12 @@ async function setupBadge() {
   setBadge(String(readlater.length));
 }
 
+async function setupDevDB() {
+  await setValue(devdb);
+}
+
 const main = async () => {
+  await setupDevDB();
   setupBadge();
   setupOmnibox();
   setupContextMenu();

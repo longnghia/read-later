@@ -20,9 +20,6 @@ jobs:
           node-version: '21'
       - name: install dependency
         run: yarn
-      - name: fix html loader
-      # https://github.com/i18next/i18next-parser/commit/6a48bd460ede9f01decbf9f2e3bbaa70ee781d83
-        run: sed -i 's|import cheerio from "cheerio";|import * as cheerio from '\''cheerio'\'';|' node_modules/@esbuilder/html/lib/html.mjs
       - name: Create Firefox artifacts
         run: |
           mkdir -p dist/v2
