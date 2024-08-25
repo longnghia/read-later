@@ -1,34 +1,49 @@
-# Read Later
+[![Badge Commits]][Commit Rate]
+[![Badge Mozilla]][Mozilla]
 
-------------
-Read Later is an extension to manage your bunch of browser's tabs.
-It keeps them in a vault that you can recall later
+***
+
+<h1 align="center">
+<sub>
+<img src="https://raw.githubusercontent.com/longnghia/read-later/main/public/icon-128.png" height="38" width="38">
+</sub>
+Read Later
+</h1>
+
+Read Later helps you to easily manage multiple tabs.
+Save tabs by shortcut and revisit them at your convenience, making it simple to stay organized and never lose track of important pages.
+
+***
+
+<p align="center">
+<a href="https://addons.mozilla.org/en-US/firefox/addon/read-it-later/"><img src="https://github.com/user-attachments/assets/a89c4124-119a-4147-822d-23ac1e831d18" alt="Get Read Later for Firefox"></a>
+</p>
+
+***
 
 ## Features
 
-### Save tabs
+[demo.webm](https://github.com/user-attachments/assets/577d4ba1-2979-4b23-9cc9-8e0e521612ba)
 
-- Save current tab by shortcut `ctrl + b`
+- Save tabs
+  - Save current tab by shortcut `ctrl + b`
+  - Click an item to open it in new tab
+  - Click plus `cmd/ctrl` will also remove it from read-later
 
-### Open tabs
-
-- Click an item to open it in new tab
-- Click plus `cmd/ctrl` will also remove it from read-later
-
-<video controls src="docs/read-later.mp4" title="Read Later" width=500></video>
+- Save groups
+  - Manage groups of related tabs
 
 ## Development
 
 - Install dependencies: `yarn`
 - Development Build: `yarn start firefox`
 - Production Build: `yarn build firefox`
-  
+
   Production Build is located in `dist/v2`
 
 ### TODO
 
 - [ ] Save hightlighted tabs
-- [ ] Save groups: Save group of related tabs
 - [ ] Export JSON data
 
 ## Credits
@@ -37,7 +52,16 @@ It keeps them in a vault that you can recall later
 - <https://www.svgbackgrounds.com/elements/animated-svg-preloaders/>
 - <https://www.flaticon.com>
 
+## License`
 
-## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-MIT
+<!---------------------------------[ Internal ]-------------------------------->
+
+[Commit Rate]: https://github.com/longnghia/read-later/commits/main
+[Mozilla]: https://addons.mozilla.org/addon/read-it-later/
+
+<!----------------------------------[ Badges ]--------------------------------->
+
+[Badge Commits]: https://img.shields.io/github/commit-activity/m/longnghia/read-later?label=Commits
+[Badge Mozilla]: https://img.shields.io/amo/rating/read-it-later?label=Firefox
