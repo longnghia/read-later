@@ -1,0 +1,17 @@
+name: Release
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body: "Automated release"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
