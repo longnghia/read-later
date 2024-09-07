@@ -35,9 +35,9 @@ Save tabs by shortcut and revisit them at your convenience, making it simple to 
 
 ## Development
 
-- Install dependencies: `yarn`
-- Development Build: `yarn start firefox`
-- Production Build: `yarn build firefox`
+- Install dependencies: `pnpm i`
+- Development Build: `pnpm run start firefox`
+- Production Build: `pnpm run build firefox`
 
   Production Build is located in `dist/v2`
 
