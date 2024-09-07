@@ -15,7 +15,7 @@ export default function PopupTabs(): JSX.Element {
   const [filteredTabs, setFilteredTabs] = useState<Tab[]>();
   const [query, setQuery] = useState('');
 
-  const transitions = useTransition(tabs, {
+  const transitions = useTransition(filteredTabs ?? [], {
     keys: (item) => item.url,
     from: { opacity: 0 },
     enter: { opacity: 1 },
