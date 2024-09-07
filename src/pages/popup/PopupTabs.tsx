@@ -1,5 +1,6 @@
 import emptyIcon from '@assets/img/empty.svg';
 import loadingIcon from '@assets/img/loading.svg';
+import { animated, useTransition } from '@react-spring/web';
 import TabRow from '@src/components/TabRow';
 import { Tab } from '@src/types';
 import { setBadge, setBadgeBackground } from '@src/utils/badge';
@@ -13,6 +14,13 @@ export default function PopupTabs(): JSX.Element {
   const [tabs, setTabs] = useState<Tab[]>([]);
   const [filteredTabs, setFilteredTabs] = useState<Tab[]>();
   const [query, setQuery] = useState('');
+
+  const transitions = useTransition(tabs, {
+    keys: (item) => item.url,
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+  });
 
   const getDatabase = useCallback(async () => {
     const storage = await getValue();
@@ -139,15 +147,17 @@ export default function PopupTabs(): JSX.Element {
         autoFocus
       />
       <div className="flex flex-col mt-4">
-        {filteredTabs.map((tab, index) => (
-          <TabRow
-            key={tab.url}
-            data={tab}
-            onClick={(e) => openAndRemoveTab(e, index)}
-            onRemove={() => {
-              removeTab(index);
-            }}
-          />
+        {transitions((style, item, t, index) => (
+          <animated.li style={style} key={item.url} className="flex items-center justify-between p-2 mb-2 border border-gray-300 rounded">
+            <TabRow
+              key={item.url}
+              data={item}
+              onClick={(e) => openAndRemoveTab(e, index)}
+              onRemove={() => {
+                removeTab(index);
+              }}
+            />
+          </animated.li>
         ))}
       </div>
     </div>
