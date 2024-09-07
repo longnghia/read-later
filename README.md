@@ -1,67 +1,69 @@
-[![Badge Commits]][Commit Rate]
-[![Badge Mozilla]][Mozilla]
-
-***
-
 <h1 align="center">
-<sub>
-<img src="https://raw.githubusercontent.com/longnghia/read-later/main/public/icon-128.png" height="38" width="38">
-</sub>
-Read Later
+  <img src="https://raw.githubusercontent.com/longnghia/read-later/main/public/icon-128.png" height="38" width="38" alt="Read Later Icon">
+  Read Later
 </h1>
 
-Read Later helps you to easily manage multiple tabs.
-Save tabs by shortcut and revisit them at your convenience, making it simple to stay organized and never lose track of important pages.
-
-***
-
 <p align="center">
-<a href="https://addons.mozilla.org/en-US/firefox/addon/read-it-later/"><img src="https://github.com/user-attachments/assets/a89c4124-119a-4147-822d-23ac1e831d18" alt="Get Read Later for Firefox"></a>
+  Easily manage multiple tabs - save for later and revisit at your convenience.
 </p>
 
-***
+<p align="center">
+  <a href="https://github.com/longnghia/read-later/commits/main">
+    <img src="https://img.shields.io/github/commit-activity/m/longnghia/read-later?label=Commits" alt="Commit Activity">
+  </a>
+  <a href="https://addons.mozilla.org/addon/read-it-later/">
+    <img src="https://img.shields.io/amo/rating/read-it-later?label=Firefox" alt="Mozilla Add-on Rating">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/read-it-later/">
+    <img src="https://github.com/user-attachments/assets/a89c4124-119a-4147-822d-23ac1e831d18" alt="Get Read Later for Firefox">
+  </a>
+</p>
 
 ## Features
 
-[demo.webm](https://github.com/user-attachments/assets/577d4ba1-2979-4b23-9cc9-8e0e521612ba)
+### Save Tabs
 
-- Save tabs
-  - Save current tab by shortcut `ctrl + b`
-  - Click an item to open it in new tab
-  - Click plus `cmd/ctrl` will also remove it from read-later
+https://github.com/user-attachments/assets/27b0eba4-c255-4e70-acee-f435cc40f915
 
-- Save groups
-  - Manage groups of related tabs
+- Save current tab with shortcut `ctrl + b`
+- Click an item to open in a new tab
+- `cmd/ctrl + click` to open and remove from read-later
+
+### Save Groups
+
+https://github.com/user-attachments/assets/ab9dc3d6-3272-46c0-b567-2da567b1e8fe
+
+- Manage groups of related tabs
 
 ## Development
 
-- Install dependencies: `yarn`
-- Development Build: `yarn start firefox`
-- Production Build: `yarn build firefox`
+```bash
+# Install dependencies
+yarn
 
-  Production Build is located in `dist/v2`
+# Development Build
+yarn start firefox
+
+# Production Build
+yarn build firefox
+```
+
+Production build is located in `dist/v2`
 
 ### TODO
 
-- [ ] Save hightlighted tabs
+- [ ] Save highlighted tabs
 - [ ] Export JSON data
 
 ## Credits
 
-- <https://github.com/debdut/browser-extension.git>
-- <https://www.svgbackgrounds.com/elements/animated-svg-preloaders/>
-- <https://www.flaticon.com>
+- [Browser Extension Template](https://github.com/debdut/browser-extension.git)
+- [SVG Backgrounds](https://www.svgbackgrounds.com/elements/animated-svg-preloaders/)
+- [Flaticon](https://www.flaticon.com)
 
-## License`
+## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-<!---------------------------------[ Internal ]-------------------------------->
-
-[Commit Rate]: https://github.com/longnghia/read-later/commits/main
-[Mozilla]: https://addons.mozilla.org/addon/read-it-later/
-
-<!----------------------------------[ Badges ]--------------------------------->
-
-[Badge Commits]: https://img.shields.io/github/commit-activity/m/longnghia/read-later?label=Commits
-[Badge Mozilla]: https://img.shields.io/amo/rating/read-it-later?label=Firefox
