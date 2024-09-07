@@ -20,6 +20,11 @@ export default {
       title: 'GitHub - mbrg/power-pwn: An offensive security toolset for Microsoft 365 focused on Microsoft Copilot, Copilot Studio and Power Platform',
       date: 1723390021819,
     },
+    {
+      url: 'https://chatgpt.com/',
+      title: 'ChatGPT',
+      date: 1723390021819,
+    },
   ],
   groups: {
     trending: ['https://github.com/trending', 'https://now.hackertab.dev/', 'https://news.ycombinator.com'],

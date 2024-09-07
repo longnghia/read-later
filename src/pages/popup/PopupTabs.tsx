@@ -148,7 +148,7 @@ export default function PopupTabs(): JSX.Element {
       />
       <div className="flex flex-col mt-4">
         {transitions((style, item, t, index) => (
-          <animated.li style={style} key={item.url} className="flex items-center justify-between mb-2 border border-gray-300 rounded">
+          <animated.div style={style} key={item.url}>
             <TabRow
               key={item.url}
               data={item}
@@ -157,7 +157,7 @@ export default function PopupTabs(): JSX.Element {
                 removeTab(index);
               }}
             />
-          </animated.li>
+          </animated.div>
         ))}
       </div>
     </div>
