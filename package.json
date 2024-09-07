@@ -16,6 +16,7 @@
   "type": "module",
   "dependencies": {
     "@types/webextension-polyfill": "^0.10.0",
+    "antd": "^5.20.5",
     "lodash": "^4.17.21",
     "patch-package": "^8.0.0",
     "react": "^18.2.0",

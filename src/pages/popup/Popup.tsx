@@ -1,7 +1,5 @@
-import {
-  useState,
-} from 'react';
-import Checkbox from './Checkbox';
+import { Segmented } from 'antd';
+import { useState } from 'react';
 import PopupGroups from './PopupGroups';
 import PopupTabs from './PopupTabs';
 import { PopupMode } from './types';
@@ -21,10 +19,13 @@ export default function Popup(): JSX.Element {
   };
   return (
     <div className="absolute top-0 bottom-0 left-0 right-0 h-full bg-white">
-      <div className="flex-row items-center self-center justify-center gap-4 m-4">
-        <Checkbox value="tabs" mode={mode} label="Tabs" onChange={() => setMode('tabs')} />
-        <Checkbox value="groups" mode={mode} label="Groups" onChange={() => setMode('groups')} />
-      </div>
+      <Segmented<PopupMode>
+        options={[
+          { label: 'Tabs', value: 'tabs' },
+          { label: 'Groups', value: 'groups' }]}
+        onChange={setMode}
+        className="flex self-center"
+      />
       <div className="p-3 ">
         {renderContent()}
       </div>
