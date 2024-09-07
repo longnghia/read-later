@@ -126,33 +126,33 @@ function setupCommands() {
 }
 
 function setupContextMenu() {
-  if (isProd) return;
+  if (!isProd) {
+    chrome.contextMenus.create({
+      id: 'debug',
+      title: 'Debug',
+      contexts: ['browser_action'],
+      onclick: () => {
+        createTab(chrome.runtime.getURL('_generated_background_page.html'), true);
+      },
+      icons: {
+        16: '../public/malware16.png',
+        32: '../public/malware32.png',
+      },
+    } as chrome.contextMenus.CreateProperties);
 
-  chrome.contextMenus.create({
-    id: 'debug',
-    title: 'Debug',
-    contexts: ['browser_action'],
-    onclick: () => {
-      createTab(chrome.runtime.getURL('_generated_background_page.html'), true);
-    },
-    icons: {
-      16: '../../assets/img/malware16.png',
-      32: '../../assets/img/malware32.png',
-    },
-  } as chrome.contextMenus.CreateProperties);
-
-  chrome.contextMenus.create({
-    id: 'popup',
-    title: 'Popup',
-    contexts: ['browser_action'],
-    onclick: () => {
-      createTab(chrome.runtime.getURL('popup/index.html'), true);
-    },
-    icons: {
-      16: '../../assets/img/popup16.png',
-      32: '../../assets/img/popup32.png',
-    },
-  } as chrome.contextMenus.CreateProperties);
+    chrome.contextMenus.create({
+      id: 'popup',
+      title: 'Popup',
+      contexts: ['browser_action'],
+      onclick: () => {
+        createTab(chrome.runtime.getURL('popup/index.html'), true);
+      },
+      icons: {
+        16: '../public/popup16.png',
+        32: '../public/popup32.png',
+      },
+    } as chrome.contextMenus.CreateProperties);
+  }
 }
 
 function setupOmnibox() {
