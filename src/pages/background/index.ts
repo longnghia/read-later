@@ -1,6 +1,7 @@
 import { Tab } from '@src/types';
 import { setBadge, setBadgeBackground } from '@src/utils/badge';
 import { isProd } from '@src/utils/env';
+import { save2Json } from '@src/utils/file';
 import { getValue, setValue } from '@src/utils/storage';
 import {
   createTab,
@@ -153,6 +154,20 @@ function setupContextMenu() {
       },
     } as chrome.contextMenus.CreateProperties);
   }
+
+  chrome.contextMenus.create({
+    id: 'export_json',
+    title: 'Export JSON',
+    contexts: ['browser_action'],
+    onclick: async () => {
+      const data = await getValue();
+      save2Json(data);
+    },
+    icons: {
+      16: '../public/json16.png',
+      32: '../public/json32.png',
+    },
+  } as chrome.contextMenus.CreateProperties);
 }
 
 function setupOmnibox() {
