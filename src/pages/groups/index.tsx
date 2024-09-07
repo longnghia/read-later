@@ -1,7 +1,7 @@
 import '@assets/styles/tailwind.css';
 import { createRoot } from 'react-dom/client';
 import ReactModal from 'react-modal';
-import PopupGroups from '../popup/PopupGroups';
+import GroupEditor from './GroupEditor';
 
 ReactModal.setAppElement('#__root');
 
@@ -11,7 +11,7 @@ function init() {
   const root = createRoot(rootContainer);
   root.render(
     <div className="p-4">
-      <PopupGroups isEditMode />
+      <GroupEditor />
     </div>,
   );
 }
