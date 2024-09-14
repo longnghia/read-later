@@ -59,6 +59,9 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
 
   const openEditPage = () => {
     createTab(chrome.runtime.getURL('groups/index.html'), true);
+    setTimeout(() => {
+      window.close();
+    }, 250);
   };
 
   const closeModal = () => {

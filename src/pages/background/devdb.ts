@@ -27,6 +27,6 @@ export default {
     },
   ],
   groups: {
-    trending: ['https://github.com/trending', 'https://now.hackertab.dev/', 'https://news.ycombinator.com'],
+    'read later': ['https://github.com/longnghia/read-later', 'https://addons.mozilla.org/en-US/firefox/addon/read-it-later/'],
   },
 };

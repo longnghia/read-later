@@ -1,10 +1,11 @@
 import VanillaJSONEditor from '@src/components/JSONEditor';
 import { Groups } from '@src/types';
 import { getValue, setValue } from '@src/utils/storage';
-import { useCallback, useEffect, useState } from 'react';
-import { Content } from 'vanilla-jsoneditor';
-import { FaSave } from 'react-icons/fa';
 import toast from '@src/utils/toast';
+import { useCallback, useEffect, useState } from 'react';
+import { FaSave } from 'react-icons/fa';
+import { Content } from 'vanilla-jsoneditor';
+import devdb from '../background/devdb';
 import useError from '../popup/useError';
 
 export default function GroupEditor() {
@@ -13,8 +14,8 @@ export default function GroupEditor() {
 
   const getDatabase = useCallback(async () => {
     const storage = await getValue();
-    const db: Groups = storage?.groups ?? [];
-    return db;
+    const db: Groups = storage?.groups;
+    return db ?? devdb.groups;
   }, []);
 
   const setDatabase = useCallback((data:Groups) => {
@@ -44,10 +45,11 @@ export default function GroupEditor() {
     }
   };
 
+  // initial data
   useEffect(() => {
     async function getGroups() {
       try {
-        const storage: Groups = await getDatabase() ?? {};
+        const storage: Groups = await getDatabase();
         setGroups({ json: storage });
       } catch (err) { onError(err); }
     }
