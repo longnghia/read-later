@@ -10,6 +10,8 @@ import useError from '../popup/useError';
 
 export default function GroupEditor() {
   const [groups, setGroups] = useState<Content>();
+  const [saved, setSaved] = useState(false);
+
   const { onError } = useError();
 
   const getDatabase = useCallback(async () => {
@@ -19,6 +21,7 @@ export default function GroupEditor() {
   }, []);
 
   const setDatabase = useCallback((data:Groups) => {
+    setSaved(true);
     setValue({
       groups: data,
     })
@@ -27,6 +30,7 @@ export default function GroupEditor() {
 
   // TODO: validate url
   const onChange = (content: Content) => {
+    setSaved(false);
     setGroups(content);
   };
 
@@ -56,9 +60,33 @@ export default function GroupEditor() {
     getGroups();
   }, [getDatabase, onError]);
 
+  // Confirmation if data is unsaved
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      const message = 'You have unsaved changes. Are you sure you want to leave?';
+
+      event.preventDefault();
+      // eslint-disable-next-line no-param-reassign
+      event.returnValue = message;
+      return message;
+    };
+    if (!saved) {
+      window.addEventListener('beforeunload', handleBeforeUnload);
+    } else {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    }
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [saved]);
+
   return (
     <div className="flex flex-col gap-4">
-      <FaSave className="text-blue-500 hover:cursor-pointer" onClick={onSave} />
+      <div className="flex flex-row items-center gap-2 hover:cursor-pointer" onClick={onSave}>
+        <FaSave className="text-blue-500" title="Save" />
+        <span className="text-sm text-blue-500">Save</span>
+      </div>
       <VanillaJSONEditor
         content={groups}
         onChange={onChange}
