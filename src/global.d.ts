@@ -52,5 +52,5 @@ declare module '*.module.pcss' {
 }
 
 declare global {
-  interface Window { getValue: any; setValue: any }
+  interface Window { getValue: any; setValue: any; clearValue: any }
 }

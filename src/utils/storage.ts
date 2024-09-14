@@ -22,6 +22,14 @@ export function setValue(obj: object) {
   });
 }
 
+export function clearValue() {
+  return new Promise((resolve) => {
+    chrome.storage.local.clear(() => {
+      resolve('[clearValue] success');
+    });
+  });
+}
+
 export function getSettings() {
   return getValue('settings');
 }
@@ -37,3 +45,4 @@ export function putSetting(config: object) {
 
 window.getValue = getValue;
 window.setValue = setValue;
+window.clearValue = clearValue;
