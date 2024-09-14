@@ -12,8 +12,11 @@ import {
 import { Command } from '../types';
 import devdb from './devdb';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, no-console
-const log = (...args: any) => console.log('[background]', args);
+const log = (...args: any) => {
+  if (isProd) return;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-console
+  console.log('[background]', args);
+};
 
 chrome.browserAction.setBadgeBackgroundColor({ color: 'blue' });
 
