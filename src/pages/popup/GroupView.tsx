@@ -5,33 +5,24 @@ import {
   FaCaretDown, FaCaretUp,
   FaTrash,
 } from 'react-icons/fa';
-import GroupEdit from './GroupEdit';
 
 export default function GroupView({
   name,
   urls: initialUrls = [],
   onRemove,
-  onUpdate,
-  isEditMode = false,
 }: {
   name: string;
   urls: string[];
   onRemove?: () => void | undefined;
-  onUpdate: (data: string[]) => void;
-  isEditMode: boolean
 }) {
   const [expanded, setExpanded] = useState(isDev);
-  const [urls, setUrls] = useState(initialUrls);
+  const [urls] = useState(initialUrls);
 
   const onExpand = () => {
     setExpanded(true);
   };
   const onCollapse = () => {
     setExpanded(false);
-  };
-  const updateGroup = (data: string[]) => {
-    setUrls(data);
-    onUpdate(data);
   };
 
   const renderUrls = () => {
@@ -45,10 +36,6 @@ export default function GroupView({
     );
   };
 
-  const renderTextArea = () => (
-    <GroupEdit urls={urls} onSubmit={updateGroup} />
-  );
-
   const openUrls = async () => {
     createTabs(urls);
   };
@@ -59,7 +46,7 @@ export default function GroupView({
         <div className="hover:cursor-pointer" onClick={openUrls}>
           {name}
         </div>
-        {!isEditMode && expanded ? (
+        {expanded ? (
           <FaCaretUp className="hover:cursor-pointer" onClick={onCollapse} />
         ) : (
           <FaCaretDown className="hover:cursor-pointer" onClick={onExpand} />
@@ -72,7 +59,7 @@ export default function GroupView({
           />
         ) : null}
       </div>
-      {!isEditMode ? renderUrls() : renderTextArea() }
+      {renderUrls() }
     </div>
   );
 }

@@ -17,7 +17,6 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
   const [filteredGroups, setFilteredGroups] = useState<Groups>();
   const [query, setQuery] = useState('');
   const [selectedGroup, setSelectGroup] = useState<string|null>(null);
-  const [newGroup, setNewGroup] = useState<string| null>(null);
   const { error, onError } = useError();
   const filteredGroupNames = Object.keys(filteredGroups ?? {});
 
@@ -58,14 +57,6 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
     setSelectGroup(null);
   };
 
-  const updateGroup = (groupName: string, newUrls: string[]) => {
-    setGroups({ ...groups, [groupName]: newUrls });
-    toast({ title: 'Saved!', text: groupName, icon: 'success' });
-    if (newGroup) {
-      setNewGroup(null);
-    }
-  };
-
   const openEditPage = () => {
     createTab(chrome.runtime.getURL('groups/index.html'), true);
   };
@@ -78,22 +69,6 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
     (event: { target: { value: string } }) => setQuery(event.target.value),
     [],
   );
-
-  const renderNewGroup = () => {
-    if (newGroup === null) return null;
-    return (
-      <div className="mt-12">
-        {/* eslint-disable-next-line jsx-a11y/no-autofocus */}
-        <input value={newGroup} onChange={(e) => setNewGroup(e.target.value)} autoFocus />
-        <GroupView
-          name={newGroup}
-          urls={[]}
-          isEditMode
-          onUpdate={(newUrls) => { updateGroup(newGroup, newUrls); }}
-        />
-      </div>
-    );
-  };
 
   // update groups on query
   useEffect(() => {
@@ -128,7 +103,7 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
     );
   }
 
-  if (filteredGroupNames.length === 0 && !newGroup && !query) {
+  if (filteredGroupNames.length === 0 && !query) {
     return (
       <div className="flex flex-col items-center justify-center w-full h-full gap-4 p-4">
         <img
@@ -137,7 +112,7 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
           alt="empty"
         />
         <span>Add New Group!</span>
-        <FaPlusCircle className="hover:cursor-pointer" onClick={() => { setNewGroup('New group'); }} />
+        <FaPlusCircle className="hover:cursor-pointer" onClick={openEditPage} />
       </div>
     );
   }
@@ -148,25 +123,21 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
         <input
           placeholder="Groups title"
           onChange={handleChangeQuery}
-          className="px-4 text-sm border border-gray-400 rounded"
+          className="px-4 w-full text-sm border border-gray-400 rounded"
         // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus
         />
-        <FaPlusCircle onClick={() => { setNewGroup('New group'); }} />
         {!isEditMode ? (
-          <FaEdit onClick={openEditPage} />
+          <FaEdit className="hover:cursor-pointer" onClick={openEditPage} />
         ) : null}
       </div>
-      {renderNewGroup()}
       <div className="flex flex-col mt-4">
         {filteredGroupNames.map((groupName) => (
           <GroupView
             key={groupName}
             name={groupName}
             onRemove={() => { setSelectGroup(groupName); }}
-            onUpdate={(newUrls) => { updateGroup(groupName, newUrls); }}
             urls={filteredGroups[groupName]}
-            isEditMode={isEditMode}
           />
         ))}
       </div>
