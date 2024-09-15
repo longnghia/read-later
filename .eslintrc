@@ -30,6 +30,7 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "jsx-a11y/no-autofocus": "off",
     "react/react-in-jsx-scope": "off",
     "import/no-unresolved": "error",
     "no-unused-vars": "off",

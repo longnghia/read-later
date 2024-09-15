@@ -7,9 +7,12 @@ import toast from '@src/utils/toast';
 import {
   useCallback, useEffect, useState,
 } from 'react';
-import { FaEdit, FaPlusCircle } from 'react-icons/fa';
+import {
+  FaEdit, FaPlusCircle,
+} from 'react-icons/fa';
 import Modal from 'react-modal';
 import GroupView from './GroupView';
+import { NewGroup } from './NewGroup';
 import useError from './useError';
 
 export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.Element {
@@ -17,8 +20,16 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
   const [filteredGroups, setFilteredGroups] = useState<Groups>();
   const [query, setQuery] = useState('');
   const [selectedGroup, setSelectGroup] = useState<string|null>(null);
+  const [showsNewGroup, setShowsNewGroup] = useState(false);
   const { error, onError } = useError();
   const filteredGroupNames = Object.keys(filteredGroups ?? {});
+
+  const showNewGroup = () => {
+    setShowsNewGroup(true);
+  };
+  const hideNewGroup = () => {
+    setShowsNewGroup(false);
+  };
 
   const getDatabase = useCallback(async () => {
     const storage = await getValue();
@@ -55,6 +66,18 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
       toast({ title: 'Error!', icon: 'error' });
     }
     setSelectGroup(null);
+  };
+
+  const addGroup = async ({ name, urls }:{name: string, urls: string[]}) => {
+    const temp = { ...groups };
+    if (!temp[name]) {
+      temp[name] = urls;
+      setGroups(temp);
+      hideNewGroup();
+      toast({ title: 'Success!', text: `Group ${name.toUpperCase()} added`, icon: 'success' });
+    } else {
+      toast({ title: 'Error!', text: `${name.toUpperCase()} existed!`, icon: 'error' });
+    }
   };
 
   const openEditPage = () => {
@@ -130,10 +153,16 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
         // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus
         />
+        <FaPlusCircle className="hover:cursor-pointer" onClick={showNewGroup} />
         {!isEditMode ? (
           <FaEdit className="hover:cursor-pointer" onClick={openEditPage} />
         ) : null}
       </div>
+      {showsNewGroup
+        ? (
+          <NewGroup onSubmit={addGroup} onCancel={hideNewGroup} />
+        )
+        : null}
       <div className="flex flex-col mt-4">
         {filteredGroupNames.map((groupName) => (
           <GroupView
