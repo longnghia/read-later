@@ -147,7 +147,7 @@ export default function PopupGroups({ isEditMode }:{isEditMode: boolean}): JSX.E
     <div>
       <div className="flex flex-row items-center gap-4">
         <input
-          placeholder="Groups title"
+          placeholder="Search Group"
           onChange={handleChangeQuery}
           className="px-4 w-full text-sm border border-gray-400 rounded"
         // eslint-disable-next-line jsx-a11y/no-autofocus

@@ -140,9 +140,9 @@ export default function PopupTabs(): JSX.Element {
   return (
     <div>
       <input
-        placeholder="Tab title"
+        placeholder="Search Tab"
         onChange={handleChangeQuery}
-        className="px-4 text-sm border border-gray-400 rounded"
+        className="w-full px-4 text-sm border border-gray-400 rounded"
         // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus
       />
