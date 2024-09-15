@@ -103,7 +103,7 @@ function setupCommands() {
 
     switch (command as Command) {
       case 'save_active_tab':
-        await savePages(false);
+        await savePages(true);
         break;
       case 'save_highlighted_tabs':
         await savePages(true);
